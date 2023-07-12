@@ -21,4 +21,14 @@ if [[ -z $CHANNEL ]] then
     exit 2
 fi
 
-ia upload -vc "twitchTEST-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" "${CHANNEL}"
+# TODO: Date range in metadata?
+
+echo "Assuming that you mean channel ${CHANNEL}. Also assuming that it's ok."
+generated_url="https://twitch.tv/${CHANNEL}"
+echo "Generated URL:\t${generated_url}"
+creator="${CHANNEL}"
+echo "Creator:\t${creator}"
+description="#burnthetwitch grabs of the Twitch channel ${CHANNEL}. METADATA ONLY!"
+echo "Desc:\t${description}"
+
+ia upload -vc "twitchTEST3-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" --metadata "originalurl:${generated_url}" --metadata "creator:${creator}" --metadata "description:${description}" "${CHANNEL}"
