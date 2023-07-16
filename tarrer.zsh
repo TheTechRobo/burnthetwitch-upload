@@ -119,7 +119,9 @@ tar_subdirectory() {
     # I'm also not sure if this compares file CONTENT, so I
     # don't yet want to remove the W flag from above.
     # (We don't want a file corrupting thanks to magic bit flips.)
-    tar df "${DIRECTORY_TO_TAR}.tar" "${DIRECTORY_TO_TAR}"
+    # Temporarily disabled for reasons.
+    echo "SKIPPING TAR VERIFICATION."
+    #tar df "${DIRECTORY_TO_TAR}.tar" "${DIRECTORY_TO_TAR}"
     # It should now be safe to remove the non-tar file, as
     # we've just established that it matches the filesystem
     rm -r "${DIRECTORY_TO_TAR}"

@@ -13,14 +13,16 @@ def extt(text: str):
         yield text[start:finish]
 
 def parse_author(author):
-    for url in extt(author['bio'] or ""):
+    for url in extt(author.get("bio") or ""):
         yield url
     for badge in author.get("badges", []):
-        if badge['click_url']:
-            yield badge['click_url']
+        if url := badge.get("click_url"):
+            yield url
+        if url := badge.get("clickURL"):
+            yield url
         for icon in badge['icons']:
             yield icon['url']
-    for image in author['images']:
+    for image in author.get("images", []):
         yield image['url']
 
 def extract_urls(message):
