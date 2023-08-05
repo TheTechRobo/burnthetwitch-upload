@@ -31,4 +31,4 @@ echo "Creator:\t${creator}"
 description="#burnthetwitch grabs of the Twitch channel ${CHANNEL}. Includes title, thumbnail, metadata, and chat replay for each grabbed video, plus WARCs generated while discovering VODs from the channel."
 echo "Description:\t${description}"
 
-ia upload -vc "twitch-metadata-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" --metadata "originalurl:${generated_url}" --metadata "creator:${creator}" --metadata "description:${description}" --metadata "collection:archiveteam_twitch_metadata" "${CHANNEL}"
+ia upload --delete -vc "twitch-metadata-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" --metadata "originalurl:${generated_url}" --metadata "creator:${creator}" --metadata "description:${description}" --metadata "collection:archiveteam_twitch_metadata" "${CHANNEL}"
