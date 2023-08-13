@@ -47,5 +47,6 @@ ia upload --delete -vc "twitch-metadata-${CHANNEL}" --metadata "title:Twitch cha
 # Delete all directories;
 # --delete leaves empty folders behind
 echo ${THE_PATH}
-rmdir ${THE_PATH}/**/*
-rmdir ${THE_PATH}
+# the (N) will ignore the glob if no matches are found; required for channel
+# items
+rmdir ${THE_PATH}/**/*(N) ${THE_PATH}
