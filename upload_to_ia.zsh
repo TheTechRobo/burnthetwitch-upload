@@ -12,14 +12,25 @@
 # DEPENDENCIES:
 #   - internetarchive Python library
 
-CHANNEL="$1"
+set -e
 
-if [[ -z $CHANNEL ]] then
+THE_PATH="${1}"
+CHANNEL="$(basename ${1})"
+if [[ ! -z "${2}" ]] then
+    CHANNEL="${2}"
+fi
+
+if [[ -z "${THE_PATH}" ]] || [[ -z "${CHANNEL}" ]] then
     echo "No channel provided. You should provide the channel dir as"
     echo "argv[1]. Make sure that it is equal to the channel username"
     echo "as the script will assume that that is the case!"
     exit 2
 fi
+
+# enter the directory right before the directory we want to archive
+cd ${THE_PATH}/..
+# now basename it
+THE_PATH="${CHANNEL}"
 
 # TODO: Date range in metadata?
 
@@ -31,4 +42,10 @@ echo "Creator:\t${creator}"
 description="#burnthetwitch grabs of the Twitch channel ${CHANNEL}. Includes title, thumbnail, metadata, and chat replay for each grabbed video, plus WARCs generated while discovering VODs from the channel."
 echo "Description:\t${description}"
 
-ia upload --delete -vc "twitch-metadata-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" --metadata "originalurl:${generated_url}" --metadata "creator:${creator}" --metadata "description:${description}" --metadata "collection:archiveteam_twitch_metadata" "${CHANNEL}"
+ia upload --delete -vc "twitch-metadata-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" --metadata "originalurl:${generated_url}" --metadata "creator:${creator}" --metadata "description:${description}" --metadata "collection:archiveteam_twitch_metadata" "${THE_PATH}"
+
+# Delete all directories;
+# --delete leaves empty folders behind
+echo ${THE_PATH}
+rmdir ${THE_PATH}/**/*
+rmdir ${THE_PATH}
