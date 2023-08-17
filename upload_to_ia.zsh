@@ -42,7 +42,7 @@ echo "Creator:\t${creator}"
 description="#burnthetwitch grabs of the Twitch channel ${CHANNEL}. Includes title, thumbnail, metadata, and chat replay for each grabbed video, plus WARCs generated while discovering VODs from the channel."
 echo "Description:\t${description}"
 
-ia upload --delete -vc "twitch-metadata-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" --metadata "originalurl:${generated_url}" --metadata "creator:${creator}" --metadata "description:${description}" --metadata "collection:archiveteam_twitch_metadata" --retries 10 "${THE_PATH}"
+ia upload --delete -vc "twitch-metadata-${CHANNEL}" --metadata "title:Twitch channel ${CHANNEL}" --metadata "scraper:#burnthetwitch (on hackint)" --metadata "originalurl:${generated_url}" --metadata "creator:${creator}" --metadata "description:${description}" --metadata "collection:archiveteam_twitch_metadata" --retries 300 "${THE_PATH}"
 
 # Delete all directories;
 # --delete leaves empty folders behind
